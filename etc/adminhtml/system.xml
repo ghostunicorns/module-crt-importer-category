@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © GhostUnicorns spa. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="crt_importer">
+            <group id="category" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Category</label>
+                <depends>
+                    <field id="crt_importer/general/enabled">1</field>
+                </depends>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Category Import</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="continue_in_case_of_errors" translate="label"
+                       type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Continue in case of errors</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="crt_importer/category/enabled">1</field>
+                    </depends>
+                    <comment>If Yes, the import will skip invalid data and continue</comment>
+                </field>
+                <field id="log_enabled" translate="label"
+                       type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Log</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="crt_importer/category/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="log_level" translate="label"
+                       type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Log Level</label>
+                    <source_model>GhostUnicorns\CrtBase\Model\Config\Source\LogLevel</source_model>
+                    <depends>
+                        <field id="crt_importer/category/enabled">1</field>
+                        <field id="crt_importer/category/log_enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © Ghost Unicorns snc. All rights reserved.
+  ~ See LICENSE for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:GhostUnicorns_CrtConfigDefinition:etc/crt.xsd">
+    <type name="import_category"
+          logger="GhostUnicorns\CrtImporterCategory\Logger\Virtual"
+          config="GhostUnicorns\CrtImporterCategory\Model\Config">
+        <description>
+            This type represents the categories imported by a CSV files
+        </description>
+        <usage>
+            You can import the categories by running bin/magento crt:all import_category
+            No extra parameters are valids.
+        </usage>
+        <collectors>
+            <collector name="category_data" sortOrder="10"
+                       model="GhostUnicorns\CrtImporterCategory\Collector\Anagrafica\Virtual"/>
+        </collectors>
+        <refiners>
+            <refiner name="id_mandatory" sortOrder="10"
+                     model="GhostUnicorns\CrtImporterCategory\Refiner\Id\Mandatory\Virtual"/>
+            <refiner name="id_intval" sortOrder="15"
+                     model="GhostUnicorns\CrtImporterCategory\Refiner\Id\Intval\Virtual"/>
+            <refiner name="is_new" sortOrder="20"
+                     model="GhostUnicorns\CrtImporterCategory\Refiner\IsNewRefiner"/>
+            <refiner name="parent_id_mandatory" sortOrder="25"
+                     model="GhostUnicorns\CrtImporterCategory\Refiner\ParentId\Mandatory\Virtual"/>
+            <refiner name="parent_id_intval" sortOrder="30"
+                     model="GhostUnicorns\CrtImporterCategory\Refiner\ParentId\Intval\Virtual"/>
+            <refiner name="name_mandatory" sortOrder="30"
+                     model="GhostUnicorns\CrtImporterCategory\Refiner\Name\Mandatory\Virtual"/>
+            <refiner name="name_trim" sortOrder="30"
+                     model="GhostUnicorns\CrtImporterCategory\Refiner\Name\Trim\Virtual"/>
+            <refiner name="is_active_mandatory_auto_fill" sortOrder="30"
+                     model="GhostUnicorns\CrtImporterCategory\Refiner\IsActive\MandatoryAutoFill\Virtual"/>
+            <refiner name="is_active_boolean" sortOrder="30"
+                     model="GhostUnicorns\CrtImporterCategory\Refiner\IsActive\Boolean\Virtual"/>
+            <refiner name="url_key" sortOrder="30"
+                     model="GhostUnicorns\CrtImporterCategory\Refiner\UrlKey\Virtual"/>
+            <refiner name="store_id_intval" sortOrder="30"
+                     model="GhostUnicorns\CrtImporterCategory\Refiner\StoreId\Intval\Virtual"/>
+            <refiner name="store_id_mandatory_auto_fill" sortOrder="30"
+                     model="GhostUnicorns\CrtImporterCategory\Refiner\StoreId\MandatoryAutoFill\Virtual"/>
+        </refiners>
+        <transferors>
+            <transferor name="categories" sortOrder="10"
+                        model="GhostUnicorns\CrtImporterCategory\Transferor\DefaultStockTransferor\Virtual" />
+        </transferors>
+    </type>
+</config>
